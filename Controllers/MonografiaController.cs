@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MonografiasIfma.Data;
 using MonografiasIfma.Models;
 
-namespace MonografiasIfma
+namespace MonografiasIfma.Controllers
 {
     public class MonografiaController : Controller
     {
@@ -161,14 +161,14 @@ namespace MonografiasIfma
             {
                 _context.Monografias.Remove(monografia);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MonografiaExists(int id)
         {
-          return (_context.Monografias?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Monografias?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
