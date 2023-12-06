@@ -10,6 +10,7 @@ using MonografiasIfma.Models;
 
 namespace MonografiasIfma.Controllers
 {
+    // [Authorize] acessível apenas a usuários autenticados (funcionários do setor), habilitar quando a autenticação estiver funcionando
     public class OrientadorController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using MonografiasIfma.Models;
 
 namespace MonografiasIfma.Controllers
 {
+    // [Authorize] acessível apenas a usuários autenticados (funcionários do setor), habilitar quando a autenticação estiver funcionando
     public class AlunoController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -59,8 +59,24 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,DataApresentacao,QtPaginas,Pdf_ArquivoBinario,AlunoId,OrientadorId")] Monografia monografia)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,DataApresentacao,QtPaginas,AlunoId,OrientadorId")] Monografia monografia,  IFormFile MonografiaPDF)
         {
+            if(MonografiaPDF != null && MonografiaPDF.Length >0)
+            {
+                //using é usado para garantir que o MemoryStream seja devidamente fechado e liberado após o uso
+                //Um MemoryStream é uma sequência de bytes na memória.
+                //O método CopyTo copia todos os bytes do arquivo (representado pelo objeto MonografiaPDF, que é do tipo IFormFile) para o MemoryStream (ms).
+                //ms.ToArray() converte os bytes armazenados no MemoryStream em um array de bytes
+                using (MemoryStream ms = new MemoryStream()) 
+                {
+                    MonografiaPDF.CopyTo(ms);
+                    monografia.Pdf_ArquivoBinario = ms.ToArray();
+                }
+
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(monografia);

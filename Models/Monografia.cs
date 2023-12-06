@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MonografiasIfma.Models
@@ -17,18 +18,18 @@ namespace MonografiasIfma.Models
 
         public int QtPaginas { get; set; }
 
+        [DisplayName("PDF da monografia")]
         [Required(ErrorMessage = "*")]
         public byte[] Pdf_ArquivoBinario { get; set; }
 
-        [Required(ErrorMessage = "*")]
+      //  [Required(ErrorMessage = "*")]           comentado para fins de testes 
 
         [ForeignKey("Aluno_Id")]
         public int AlunoId { get; set; }
 
         public  Aluno Aluno { get; set; }
 
-        [Required(ErrorMessage = "*")]
-
+        //   [Required(ErrorMessage = "*")]        comentado para fins de testes
         [ForeignKey("orientador_id")]
         public int OrientadorId { get; set; }
         public Orientador Orientador { get; set; }
