@@ -10,6 +10,8 @@ namespace MonografiasIfma.Models
         [DisplayName("Código do Funcionário")]
         public string Codigo { get; set; } //login do funcionário
 
-
+        [DisplayName("Tipo de Usuário")]
+        [Required]
+        public int UserType { get; set; } // 1 - chefe; 2 - funcionário; 3 - aluno; 4 - professor;
     }
 }
