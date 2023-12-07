@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +10,6 @@ using MonografiasIfma.Models;
 
 namespace MonografiasIfma.Controllers
 {
-    // [Authorize] acessível apenas a usuários autenticados (funcionários do setor), habilitar quando a autenticação estiver funcionando
     public class FuncionarioController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,9 +22,9 @@ namespace MonografiasIfma.Controllers
         // GET: Funcionario
         public async Task<IActionResult> Index()
         {
-            return _context.Funcionarios != null ?
-                        View(await _context.Funcionarios.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Funcionarios'  is null.");
+              return _context.Funcionarios != null ? 
+                          View(await _context.Funcionarios.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Funcionarios'  is null.");
         }
 
         // GET: Funcionario/Details/5
@@ -57,7 +56,7 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Codigo,Id,Nome,Email,Telefone,Cidade,Campus,UserType")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("Codigo,UserType,Id,Nome,Email,Telefone,Cidade,Campus")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +88,7 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Codigo,Id,Nome,Email,Telefone,Cidade,Campus,UserType")] Funcionario funcionario)
+        public async Task<IActionResult> Edit(int id, [Bind("Codigo,UserType,Id,Nome,Email,Telefone,Cidade,Campus")] Funcionario funcionario)
         {
             if (id != funcionario.Id)
             {
@@ -151,14 +150,14 @@ namespace MonografiasIfma.Controllers
             {
                 _context.Funcionarios.Remove(funcionario);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FuncionarioExists(int id)
         {
-            return (_context.Funcionarios?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Funcionarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,4 +1,4 @@
-@model MonografiasIfma.Models.Monografia
+﻿@model MonografiasIfma.Models.Monografia
 
 @{
     ViewData["Title"] = "Create";
@@ -10,8 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
                 <input asp-for="Titulo" class="form-control" />
@@ -29,7 +29,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pdf_ArquivoBinario" class="control-label"></label>
-                <input type="file" name="MonografiaPDF" class="form-control" />
+                <input asp-for="Pdf_ArquivoBinario" class="form-control" />
+                <span asp-validation-for="Pdf_ArquivoBinario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AlunoId" class="control-label"></label>
@@ -50,3 +51,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

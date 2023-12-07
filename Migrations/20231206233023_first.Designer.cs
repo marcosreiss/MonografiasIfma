@@ -9,11 +9,11 @@ using MonografiasIfma.Data;
 
 #nullable disable
 
-namespace MonografiasIfma.Data.Migrations
+namespace MonografiasIfma.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231205184453_RemodelandoAluno")]
-    partial class RemodelandoAluno
+    [Migration("20231206233023_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,9 +260,6 @@ namespace MonografiasIfma.Data.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Aluno");
@@ -306,7 +303,7 @@ namespace MonografiasIfma.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Funcionarios");
+                    b.ToTable("funcionario");
                 });
 
             modelBuilder.Entity("MonografiasIfma.Models.Monografia", b =>
@@ -378,9 +375,6 @@ namespace MonografiasIfma.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
-
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

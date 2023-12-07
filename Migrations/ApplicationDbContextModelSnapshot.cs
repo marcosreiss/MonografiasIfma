@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonografiasIfma.Data;
 
 #nullable disable
 
-namespace MonografiasIfma.Data.Migrations
+namespace MonografiasIfma.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231205150807_AdicionandoModelo")]
-    partial class AdicionandoModelo
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,9 +257,6 @@ namespace MonografiasIfma.Data.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Aluno");
@@ -306,7 +300,7 @@ namespace MonografiasIfma.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Funcionarios");
+                    b.ToTable("funcionario");
                 });
 
             modelBuilder.Entity("MonografiasIfma.Models.Monografia", b =>
@@ -378,9 +372,6 @@ namespace MonografiasIfma.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
-
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

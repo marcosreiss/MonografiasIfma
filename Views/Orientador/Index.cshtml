@@ -1,4 +1,4 @@
-@model IEnumerable<MonografiasIfma.Models.Orientador>
+﻿@model IEnumerable<MonografiasIfma.Models.Orientador>
 
 @{
     ViewData["Title"] = "Index";
@@ -30,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Campus)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserType)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -56,9 +53,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Campus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserType)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

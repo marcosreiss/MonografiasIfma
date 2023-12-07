@@ -30,8 +30,5 @@ namespace MonografiasIfma.Models
         [Required(ErrorMessage = "*")]
         public string Campus { get; set; }
 
-        [DisplayName("Tipo de Usuário")]
-        [Required]
-        public int UserType { get; set; } // 1 - chefe; 2 - funcionário; 3 - aluno; 4 - professor;
     }
 }
