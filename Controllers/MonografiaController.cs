@@ -30,10 +30,13 @@ namespace MonografiasIfma.Controllers
                 return NotFound();
             }
 
+
             var monografia = await _context.Monografias
                 .Include(m => m.Aluno)
                 .Include(m => m.Orientador)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
+
             if (monografia == null)
             {
                 return NotFound();
