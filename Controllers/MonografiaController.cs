@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -75,16 +71,14 @@ namespace MonografiasIfma.Controllers
 
             }
 
-
-
             if (ModelState.IsValid)
             {
                 _context.Add(monografia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AlunoId"] = new SelectList(_context.Alunos, "Id", "Campus", monografia.AlunoId);
-            ViewData["OrientadorId"] = new SelectList(_context.Orientadores, "Id", "Campus", monografia.OrientadorId);
+            ViewData["AlunoId"] = new SelectList(_context.Alunos, "Id", "Nome", monografia.AlunoId);
+            ViewData["OrientadorId"] = new SelectList(_context.Orientadores, "Id", "Nome", monografia.OrientadorId);
             return View(monografia);
         }
 

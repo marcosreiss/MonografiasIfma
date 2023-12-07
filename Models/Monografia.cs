@@ -27,8 +27,7 @@ namespace MonografiasIfma.Models
 
 
         [DisplayName("PDF da monografia")]
-        [Required(ErrorMessage = "*")]
-        public byte[] Pdf_ArquivoBinario { get; set; }
+        public byte[]? Pdf_ArquivoBinario { get; set; }
 
 
 
