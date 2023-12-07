@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,7 @@ using MonografiasIfma.Models;
 
 namespace MonografiasIfma.Controllers
 {
+    // [Authorize] acessível apenas a usuários autenticados (funcionários do setor), habilitar quando a autenticação estiver funcionando
     public class OrientadorController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,9 +23,9 @@ namespace MonografiasIfma.Controllers
         // GET: Orientador
         public async Task<IActionResult> Index()
         {
-              return _context.Orientadores != null ? 
-                          View(await _context.Orientadores.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Orientadores'  is null.");
+            return _context.Orientadores != null ?
+                        View(await _context.Orientadores.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Orientadores'  is null.");
         }
 
         // GET: Orientador/Details/5
@@ -56,7 +57,7 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Siap,Id,Nome,Email,Telefone,Cidade,Campus")] Orientador orientador)
+        public async Task<IActionResult> Create([Bind("Siap,Id,Nome,Email,Telefone,Cidade,Campus,UserType")] Orientador orientador)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +89,7 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Siap,Id,Nome,Email,Telefone,Cidade,Campus")] Orientador orientador)
+        public async Task<IActionResult> Edit(int id, [Bind("Siap,Id,Nome,Email,Telefone,Cidade,Campus,UserType")] Orientador orientador)
         {
             if (id != orientador.Id)
             {
@@ -150,14 +151,14 @@ namespace MonografiasIfma.Controllers
             {
                 _context.Orientadores.Remove(orientador);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrientadorExists(int id)
         {
-          return (_context.Orientadores?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Orientadores?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

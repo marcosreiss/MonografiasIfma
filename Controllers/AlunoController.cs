@@ -1,7 +1,8 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using MonografiasIfma.Models;
 
 namespace MonografiasIfma.Controllers
 {
+    // [Authorize] acessível apenas a usuários autenticados (funcionários do setor), habilitar quando a autenticação estiver funcionando
     public class AlunoController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,9 +24,9 @@ namespace MonografiasIfma.Controllers
         // GET: Aluno
         public async Task<IActionResult> Index()
         {
-              return _context.Alunos != null ? 
-                          View(await _context.Alunos.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Alunos'  is null.");
+            return _context.Alunos != null ?
+                        View(await _context.Alunos.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Alunos'  is null.");
         }
 
         // GET: Aluno/Details/5
@@ -56,7 +58,7 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Matricula,Id,Nome,Email,Telefone,Cidade,Campus")] Aluno aluno)
+        public async Task<IActionResult> Create([Bind("Matricula,Id,Nome,Email,Telefone,Cidade,Campus,UserType")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +90,7 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Matricula,Id,Nome,Email,Telefone,Cidade,Campus")] Aluno aluno)
+        public async Task<IActionResult> Edit(int id, [Bind("Matricula,Id,Nome,Email,Telefone,Cidade,Campus,UserType")] Aluno aluno)
         {
             if (id != aluno.Id)
             {
@@ -150,14 +152,14 @@ namespace MonografiasIfma.Controllers
             {
                 _context.Alunos.Remove(aluno);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AlunoExists(int id)
         {
-          return (_context.Alunos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Alunos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
