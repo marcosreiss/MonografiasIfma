@@ -62,15 +62,26 @@ namespace MonografiasIfma.Controllers
         {
             if(MonografiaPDF != null && MonografiaPDF.Length >0)
             {
-                //using é usado para garantir que o MemoryStream seja devidamente fechado e liberado após o uso
-                //Um MemoryStream é uma sequência de bytes na memória.
-                //O método CopyTo copia todos os bytes do arquivo (representado pelo objeto MonografiaPDF, que é do tipo IFormFile) para o MemoryStream (ms).
-                //ms.ToArray() converte os bytes armazenados no MemoryStream em um array de bytes
-                using (MemoryStream ms = new MemoryStream()) 
+
+                if (Path.GetExtension(MonografiaPDF.FileName).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
                 {
-                    MonografiaPDF.CopyTo(ms);
-                    monografia.Pdf_ArquivoBinario = ms.ToArray();
+                    //using é usado para garantir que o MemoryStream seja devidamente fechado e liberado após o uso
+                    //Um MemoryStream é uma sequência de bytes na memória.
+                    //O método CopyTo copia todos os bytes do arquivo (representado pelo objeto MonografiaPDF, que é do tipo IFormFile) para o MemoryStream (ms).
+                    //ms.ToArray() converte os bytes armazenados no MemoryStream em um array de bytes
+                    using (MemoryStream ms = new MemoryStream()) 
+                    {
+                        MonografiaPDF.CopyTo(ms);
+                        monografia.Pdf_ArquivoBinario = ms.ToArray();
+                    }
                 }
+                else
+                {
+                    
+                    return View(); // Retornar a view para que a mensagem seja exibida na tela
+                }
+
+
 
             }
 
