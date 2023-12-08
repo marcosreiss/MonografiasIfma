@@ -1,19 +1,42 @@
 ﻿
 <ul class="sidebar-menu" data-widget="tree">
-    <li class="header">Cabeçalho</li>
+
+    <li class="header">Menu</li>
     <!-- Optionally, you can add icons to the links -->
-    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-    <li><a href="#"><i class="fa fa-link"></i> <span>Outro Link</span></a></li>
+
+    <li class="active">
+            <i class="fa fa-link"></i>
+        <partial name="_LoginPartial" />
+    </li>
+    <br />
+    <br />
+    <br />
+
+    <li>
+        <a asp-controller="Monografia" asp-action="Index">
+            <i class="fa fa-link"></i>
+            <span>Monografia</span>
+        </a>
+    </li>
+
+    <li>
+        <a asp-controller="Funcionario" asp-action="Index">
+            <i class="fa fa-link"></i> 
+            <span>Funcionário</span>
+        </a>
+    </li>
+
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-link"></i> <span>MultiNível</span>
+            <i class="fa fa-link"></i> <span>Docentes e dicentes</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#">Link em Nível 2</a></li>
-            <li><a href="#">Link em Nível 2</a></li>
+            <li><a asp-controller="Aluno" asp-action="Index">Alunos</a></li>
+            <li><a asp-controller="Orientador" asp-action="Index">Professores Orientadores</a></li>
         </ul>
     </li>
+
 </ul>

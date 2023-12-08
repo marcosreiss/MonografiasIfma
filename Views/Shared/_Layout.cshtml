@@ -23,11 +23,11 @@
         <!-- Main Header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a asp-controller="Home" asp-action="Index" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>AP</b>T</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>AdminPanel</b>Tutorial</span>
+                <span class="logo-lg">SIG <strong>Monografias</strong></span>
             </a>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -90,7 +90,7 @@
                         <img src="~/dist/img/mac_160x160.jpg" class="img-circle" alt="Imagem do usuário">
                     </div>
                     <div class="pull-left info">
-                        <p>Macoratti</p>
+                        <p>Username</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
@@ -123,8 +123,7 @@
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2018 <a href="https://www.macoratti.net">Macoratti.net</a>.</strong>
-            All rights reserved.
+            <strong> 2023 - Sig Monografias Ifma - <a href="https://github.com/marcosreiss/MonografiasIfma.git">Open source</a>.</strong>
         </footer>
     </div>
     <!-- ./wrapper -->
@@ -135,5 +134,8 @@
     <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/dist/js/adminlte.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
