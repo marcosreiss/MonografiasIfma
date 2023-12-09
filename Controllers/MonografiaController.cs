@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MonografiasIfma.Data;
 using MonografiasIfma.Models;
+using System.Security.Cryptography;
 
 namespace MonografiasIfma.Controllers
 {
@@ -29,6 +30,7 @@ namespace MonografiasIfma.Controllers
             {
                 return NotFound();
             }
+
 
 
             var monografia = await _context.Monografias
@@ -58,31 +60,40 @@ namespace MonografiasIfma.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,DataApresentacao,QtPaginas,AlunoId,OrientadorId")] Monografia monografia,  IFormFile MonografiaPDF)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,DataApresentacao,QtPaginas,AlunoId,OrientadorId")] Monografia monografia, IFormFile MonografiaPDF)
         {
-            if(MonografiaPDF != null && MonografiaPDF.Length >0)
-            {
 
+            if (MonografiaPDF != null && MonografiaPDF.Length > 0)
+            {
                 if (Path.GetExtension(MonografiaPDF.FileName).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
                 {
-                    //using é usado para garantir que o MemoryStream seja devidamente fechado e liberado após o uso
-                    //Um MemoryStream é uma sequência de bytes na memória.
-                    //O método CopyTo copia todos os bytes do arquivo (representado pelo objeto MonografiaPDF, que é do tipo IFormFile) para o MemoryStream (ms).
-                    //ms.ToArray() converte os bytes armazenados no MemoryStream em um array de bytes
-                    using (MemoryStream ms = new MemoryStream()) 
+                    using (MemoryStream ms = new MemoryStream())
                     {
                         MonografiaPDF.CopyTo(ms);
                         monografia.Pdf_ArquivoBinario = ms.ToArray();
+
+                        // Calcula o checksum SHA-256 do conteúdo do arquivo PDF
+                        string checksum = CalculateChecksum(ms);
+                        monografia.checksum = checksum;
+
+                        if (_context.Monografias.Any(m => m.checksum == checksum))
+                        {
+                            ModelState.AddModelError("Pdf_ArquivoBinario", "*Já existe uma monografia com o mesmo arquivo PDF*");
+                            ViewData["AlunoId"] = new SelectList(_context.Alunos, "Id", "Nome");
+                            ViewData["OrientadorId"] = new SelectList(_context.Orientadores, "Id", "Nome");
+                            return View(monografia);
+                        }
+
                     }
                 }
                 else
                 {
-                    
-                    return View(); // Retornar a view para que a mensagem seja exibida na tela
+                    // Define uma mensagem de erro se o arquivo não for um PDF
+                    ModelState.AddModelError("Pdf_ArquivoBinario", "*O arquivo tem que ser em formato de PDF*");
+                    ViewData["AlunoId"] = new SelectList(_context.Alunos, "Id", "Nome");
+                    ViewData["OrientadorId"] = new SelectList(_context.Orientadores, "Id", "Nome");
+                    return View(monografia);
                 }
-
-
-
             }
 
             if (ModelState.IsValid)
@@ -91,9 +102,22 @@ namespace MonografiasIfma.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AlunoId"] = new SelectList(_context.Alunos, "Id", "Nome", monografia.AlunoId);
-            ViewData["OrientadorId"] = new SelectList(_context.Orientadores, "Id", "Nome", monografia.OrientadorId);
-            return View(monografia);
+            else
+            {
+                // Restante do código para lidar com outros erros de validação
+                ViewData["AlunoId"] = new SelectList(_context.Alunos, "Id", "Nome");
+                ViewData["OrientadorId"] = new SelectList(_context.Orientadores, "Id", "Nome");
+                return View(monografia);
+            }
+        }
+
+        private string CalculateChecksum(MemoryStream stream)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(stream.ToArray());
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
         }
 
         // GET: Monografia/Edit/5

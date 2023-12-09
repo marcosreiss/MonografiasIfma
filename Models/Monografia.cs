@@ -16,6 +16,8 @@ namespace MonografiasIfma.Models
         public string Titulo { get; set; }
 
 
+        public string? checksum { get; set; }
+
 
         [Required(ErrorMessage = "*")]
         public DateTime DataApresentacao { get; set; }
