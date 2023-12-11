@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MonografiasIfma.Models
 {
-    public class Usuario
+    public class Persona
     {
         [Key]
         public int Id { get; set; }
