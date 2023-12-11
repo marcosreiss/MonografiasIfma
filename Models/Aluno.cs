@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MonografiasIfma.Models
 {
     [Table("Aluno")]
-    public class Aluno : Usuario
+    public class Aluno : Persona
     {
         [Required(ErrorMessage = "*")]
         public string Matricula { get; set; }

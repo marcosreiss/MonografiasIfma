@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MonografiasIfma.Models
 {
     [Table("orientador")]
-    public class Orientador : Usuario
+    public class Orientador : Persona
     {
         public Orientador()
         {
