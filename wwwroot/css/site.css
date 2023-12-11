@@ -20,3 +20,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.menuLi {
+    border-radius: 10px;
+    background-color: #E0D7D7;
+    color: #36BA2B;
+    margin-top: 5px;
+    font-size: 20px; /* Tamanho padrão da fonte */
+    transition: background-color 0.3s;
+}
+
+.menuLi:hover {
+    background-color: #A9A9A9;
+    color: white;
+}
