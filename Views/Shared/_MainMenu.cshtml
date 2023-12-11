@@ -23,24 +23,24 @@
         <a href="#" style="display: flex; align-items: center;">
             <img src="~/imgs/alunoIcon.png" style="width height:40"  />
             <span style="background-color: #E0D7D7;color: #36BA2B; font-size: 16px;border-radius: 10px">Docentes e dicentes</span>
-            <span class="pull-right-container">
+            <span class="pull-right-container menuLi">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
-        <ul class="treeview-menu">
-            <li class="menuLi" style="display: flex; align-items: center; border-radius: 10px">
-                <img src="~/imgs/alunoIcon.png" style="margin-left: 20px"/>
-                <a style="color: #36BA2B; font-size: 16px" asp-controller="Aluno" asp-action="Index">Alunos</a>
-            </li>
+            <ul class="treeview-menu">
+                <li class="menuLi" style="display: flex; align-items: center; border-radius: 10px">
+                    <img src="~/imgs/alunoIcon.png" style="margin-left: 20px" />
+                    <a style="color: #36BA2B; font-size: 16px" asp-controller="Aluno" asp-action="Index">Alunos</a>
+                </li>
 
-            <li class="menuLi" style="display: flex; align-items: center;">
-                <img src="~/imgs/professorIcon.png" style="margin-left: 20px" />
-                <a style="color: #36BA2B; font-size: 16px" asp-controller="Orientador" asp-action="Index">Orientadores</a>
-            </li>
-        </ul>
+                <li class="menuLi" style="display: flex; align-items: center;">
+                    <img src="~/imgs/professorIcon.png" style="margin-left: 20px" />
+                    <a style="color: #36BA2B; font-size: 16px" asp-controller="Orientador" asp-action="Index">Orientadores</a>
+                </li>
+            </ul>
     </li>
 
-    <li style="background-color: #E0D7D7; margin-top: 5px; height:100; border-radius:10px">
+    <li class="menuLi">
         <a class="btn menuLi" style="display: flex; align-items: center;" asp-controller="Home" asp-action="Index">
             <img src="~/imgs/usuario.png" />
             <span style="margin:5px; border-radius: 10px;font-size: 16px">Usuarios</span>
